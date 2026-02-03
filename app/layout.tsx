@@ -1,7 +1,7 @@
 import React from "react"
 import type { Metadata, Viewport } from 'next'
 import { Space_Grotesk, JetBrains_Mono } from 'next/font/google'
-import { Analytics } from '@vercel/analytics/next'
+import { Analytics } from '@vercel/analytics/react'
 import './globals.css'
 
 const _spaceGrotesk = Space_Grotesk({ subsets: ["latin"] });
