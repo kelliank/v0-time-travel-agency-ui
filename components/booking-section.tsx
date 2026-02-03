@@ -10,16 +10,14 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Calendar, Users, MapPin, Check, Sparkles } from "lucide-react"
 
 const destinations = [
-  { value: "egypt", label: "Égypte Ancienne (2500 av. J.-C.)" },
-  { value: "rome", label: "Rome Impériale (50 ap. J.-C.)" },
-  { value: "florence", label: "Renaissance Florentine (1500)" },
-  { value: "tokyo", label: "Tokyo Néon 2150" },
-  { value: "mars", label: "Mars Colony 2350" },
-  { value: "atlantis", label: "Cité Atlantide" }
+  { value: "paris", label: "Paris 1889 (Belle Époque)" },
+  { value: "cretace", label: "Crétacé (-65 millions d'années)" },
+  { value: "florence", label: "Florence 1504 (Renaissance)" }
 ]
 
 export function BookingSection() {
   const [step, setStep] = useState(1)
+  const [isSubmitted, setIsSubmitted] = useState(false)
   const [formData, setFormData] = useState({
     destination: "",
     date: "",
@@ -32,6 +30,10 @@ export function BookingSection() {
     e.preventDefault()
     if (step < 3) {
       setStep(step + 1)
+    } else {
+      // Dernière étape : confirmer la réservation
+      setIsSubmitted(true)
+      console.log("Réservation confirmée:", formData)
     }
   }
 
@@ -49,7 +51,7 @@ export function BookingSection() {
   }
 
   return (
-    <section id="contact" className="py-24 px-4 relative overflow-hidden">
+    <section id="reservation" className="py-24 px-4 relative overflow-hidden">
       {/* Background decoration */}
       <div className="absolute inset-0">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-primary/5 blur-3xl" />
@@ -94,7 +96,8 @@ export function BookingSection() {
 
         {/* Form */}
         <div className="glass-effect border border-border rounded-2xl p-8">
-          <form onSubmit={handleSubmit}>
+          {!isSubmitted ? (
+            <form onSubmit={handleSubmit}>
             {/* Step 1: Destination & Date */}
             {step === 1 && (
               <div className="space-y-6 animate-in fade-in duration-300">
@@ -252,6 +255,36 @@ export function BookingSection() {
               </Button>
             </div>
           </form>
+          ) : (
+            <div className="text-center py-12 animate-in fade-in duration-500">
+              <div className="w-20 h-20 rounded-full bg-green-500/20 flex items-center justify-center mx-auto mb-6">
+                <Check className="w-10 h-10 text-green-500" />
+              </div>
+              <h3 className="text-2xl font-bold mb-4 text-foreground">Réservation confirmée !</h3>
+              <p className="text-muted-foreground mb-2">
+                Merci {formData.name} pour votre réservation.
+              </p>
+              <p className="text-muted-foreground mb-8">
+                Vous recevrez un email de confirmation à <span className="text-primary font-semibold">{formData.email}</span> avec tous les détails de votre voyage.
+              </p>
+              <Button 
+                onClick={() => {
+                  setIsSubmitted(false)
+                  setStep(1)
+                  setFormData({
+                    destination: "",
+                    date: "",
+                    travelers: "",
+                    name: "",
+                    email: ""
+                  })
+                }}
+                className="bg-primary text-primary-foreground hover:bg-primary/90"
+              >
+                Nouvelle réservation
+              </Button>
+            </div>
+          )}
         </div>
       </div>
     </section>
