@@ -41,6 +41,18 @@ TimeTravel Agency est une application web fictive d'agence de voyage temporel de
 - 🧭 **Navigation fluide** - Expérience utilisateur optimisée
 - 📱 **Mobile-first** - Conçu d'abord pour les appareils mobiles
 
+### Sections du Site
+- 🏠 **Hero Section** - Page d'accueil accrocheuse avec call-to-action
+- ℹ️ **À propos** - Présentation de l'agence et de ses services
+- 🗓️ **Époques disponibles** - Catalogue des périodes historiques visitables
+- 🌍 **Destinations** - Détails sur chaque destination temporelle :
+  - **Paris 1889** (Belle Époque) - Exposition Universelle, Tour Eiffel
+  - **Crétacé** (-65M années) - Ère des dinosaures
+  - **Florence 1505** (Renaissance) - Art et culture italienne
+- 📝 **Système de réservation** - Formulaire interactif pour planifier son voyage
+- 📧 **Section Contact** - Formulaire de contact et informations pratiques
+- 👤 **Footer** - Informations de contact et liens utiles
+
 ### Chatbot Intelligent "Chrono"
 - 💬 **Assistant conversationnel** - Conseiller virtuel disponible 24/7
 - 🤖 **IA générative** - Réponses personnalisées et contextuelles
@@ -123,8 +135,13 @@ v0-time-travel-agency-ui/
 │   ├── ui/               # Composants UI réutilisables
 │   ├── navbar.tsx        # Navigation
 │   ├── hero-section.tsx  # Section hero
-│   ├── chatbot.tsx       # Chatbot Chrono
-│   └── ...               # Autres sections
+│   ├── about-section.tsx # Section à propos
+│   ├── eras-section.tsx  # Section époques
+│   ├── destinations-section.tsx # Section destinations
+│   ├── booking-section.tsx # Section réservation
+│   ├── contact-section.tsx # Section contact
+│   ├── footer.tsx        # Pied de page
+│   └── chatbot.tsx       # Chatbot Chrono
 ├── lib/                   # Utilitaires
 ├── public/               # Assets statiques
 └── styles/               # Styles CSS
