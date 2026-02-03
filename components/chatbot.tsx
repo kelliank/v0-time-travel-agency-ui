@@ -10,48 +10,25 @@ interface Message {
   text: string
   isBot: boolean
   timestamp: Date
+  role?: 'user' | 'assistant'
 }
 
 const quickReplies = [
   "Quelle destination recommandez-vous ?",
-  "Quels sont les risques ?",
-  "Comment fonctionne le voyage ?",
-  "Prix et réservation"
+  "Parlez-moi du Crétacé",
+  "Je m'intéresse à l'art",
+  "Quels sont les risques ?"
 ]
-
-const botResponses: Record<string, string> = {
-  "destination": "Je vous recommande l'Égypte Ancienne pour une première expérience ! C'est une destination fascinante avec un niveau de risque modéré. Vous pourrez assister à la construction des pyramides et rencontrer les pharaons.",
-  "risque": "Chaque voyage comporte un niveau de risque évalué par nos experts. Nous avons trois niveaux : Faible, Modéré et Élevé. Nos guides formés vous accompagnent à chaque instant et notre technologie de rapatriement d'urgence est toujours active.",
-  "fonctionne": "Notre technologie de portail quantique crée une brèche temporelle sécurisée. Vous êtes équipé d'un dispositif de synchronisation qui vous maintient ancré à notre époque. Le voyage est instantané et sans effets secondaires.",
-  "prix": "Nos forfaits commencent à partir de 15 000€ pour une expérience de 2 jours. Nous proposons des plans de financement et des offres spéciales pour les premiers voyageurs. Souhaitez-vous que je vous envoie notre brochure ?",
-  "default": "Merci pour votre question ! Je suis Chrono, votre assistant TimeTravel. Je peux vous aider à choisir votre destination, comprendre notre technologie, ou répondre à vos questions sur la sécurité et les tarifs."
-}
-
-function getBotResponse(message: string): string {
-  const lowerMessage = message.toLowerCase()
-  if (lowerMessage.includes("destination") || lowerMessage.includes("recommand")) {
-    return botResponses.destination
-  }
-  if (lowerMessage.includes("risque") || lowerMessage.includes("danger") || lowerMessage.includes("sécur")) {
-    return botResponses.risque
-  }
-  if (lowerMessage.includes("fonctionne") || lowerMessage.includes("comment") || lowerMessage.includes("technologie")) {
-    return botResponses.fonctionne
-  }
-  if (lowerMessage.includes("prix") || lowerMessage.includes("réserv") || lowerMessage.includes("tarif") || lowerMessage.includes("coût")) {
-    return botResponses.prix
-  }
-  return botResponses.default
-}
 
 export function Chatbot() {
   const [isOpen, setIsOpen] = useState(false)
   const [messages, setMessages] = useState<Message[]>([
     {
       id: 1,
-      text: "Bonjour ! Je suis Chrono, votre assistant TimeTravel. Comment puis-je vous aider à planifier votre voyage temporel ?",
+      text: "Bonjour et bienvenue chez TimeTravel Agency ! Je suis Chrono, votre conseiller personnel en voyages temporels. Je serais ravi de vous aider à découvrir nos destinations exclusives : la Belle Époque à Paris, la Renaissance à Florence, ou l'ère des dinosaures au Crétacé. Quelle époque vous fait rêver ?",
       isBot: true,
-      timestamp: new Date()
+      timestamp: new Date(),
+      role: 'assistant'
     }
   ])
   const [inputValue, setInputValue] = useState("")
@@ -66,7 +43,7 @@ export function Chatbot() {
     scrollToBottom()
   }, [messages])
 
-  const handleSendMessage = (text?: string) => {
+  const handleSendMessage = async (text?: string) => {
     const messageText = text || inputValue.trim()
     if (!messageText) return
 
@@ -75,23 +52,60 @@ export function Chatbot() {
       id: messages.length + 1,
       text: messageText,
       isBot: false,
-      timestamp: new Date()
+      timestamp: new Date(),
+      role: 'user'
     }
     setMessages(prev => [...prev, userMessage])
     setInputValue("")
     setIsTyping(true)
 
-    // Simulate bot response delay
-    setTimeout(() => {
+    try {
+      // Préparer l'historique de conversation pour Mistral
+      const conversationHistory = [...messages, userMessage]
+        .filter(m => m.role)
+        .map(m => ({
+          role: m.isBot ? 'assistant' : 'user',
+          content: m.text
+        }))
+
+      // Appeler l'API
+      const response = await fetch('/api/chat', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          messages: conversationHistory
+        })
+      })
+
+      if (!response.ok) {
+        throw new Error('Erreur lors de la communication avec le serveur')
+      }
+
+      const data = await response.json()
+      
       const botMessage: Message = {
         id: messages.length + 2,
-        text: getBotResponse(messageText),
+        text: data.message || "Désolé, je n'ai pas pu générer une réponse.",
         isBot: true,
-        timestamp: new Date()
+        timestamp: new Date(),
+        role: 'assistant'
       }
       setMessages(prev => [...prev, botMessage])
+    } catch (error) {
+      console.error('Erreur:', error)
+      const errorMessage: Message = {
+        id: messages.length + 2,
+        text: "Désolé, une erreur s'est produite. Veuillez réessayer.",
+        isBot: true,
+        timestamp: new Date(),
+        role: 'assistant'
+      }
+      setMessages(prev => [...prev, errorMessage])
+    } finally {
       setIsTyping(false)
-    }, 1000 + Math.random() * 1000)
+    }
   }
 
   return (
