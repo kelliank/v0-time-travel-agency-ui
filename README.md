@@ -126,7 +126,7 @@ pnpm start
 
 L'application est déployée automatiquement sur Vercel :
 
-**[https://vercel.com/kelliankauffmann-2231s-projects/v0-time-travel-agency-ui](https://vercel.com/kelliankauffmann-2231s-projects/v0-time-travel-agency-ui)**
+**[https://v0-time-travel-agency-p412u8g0j-kelliankauffmann-2231s-projects.vercel.app]**
 
 Chaque push sur la branche principale déclenche un nouveau déploiement automatique.
 
