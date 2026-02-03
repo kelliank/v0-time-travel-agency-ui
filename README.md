@@ -60,6 +60,15 @@ TimeTravel Agency est une application web fictive d'agence de voyage temporel de
 - 📚 **Expertise historique** - Conseils détaillés sur chaque époque
 - 🎯 **Recommandations personnalisées** - Aide au choix de destination
 
+### Quiz de Recommandation Personnalisée
+- 🎯 **Système intelligent** - 4 questions pour identifier la destination idéale
+- 🧮 **Algorithme de scoring** - Calcul pondéré basé sur les préférences
+- ✨ **Explication IA** - Mistral AI génère une recommandation personnalisée et contextuelle
+- 📊 **Interface interactive** - Barre de progression, navigation fluide
+- 🎨 **Design engageant** - Sélection visuelle des réponses avec animations
+- 🔄 **Réutilisable** - Possibilité de refaire le quiz pour comparer les résultats
+- 🚀 **Action directe** - Bouton de réservation vers la destination recommandée
+
 ## 🤖 Intelligence Artificielle Utilisée
 
 Ce projet a été développé avec l'assistance de plusieurs outils d'IA de pointe :
@@ -138,6 +147,7 @@ v0-time-travel-agency-ui/
 │   ├── about-section.tsx # Section à propos
 │   ├── eras-section.tsx  # Section époques
 │   ├── destinations-section.tsx # Section destinations
+│   ├── quiz-section.tsx  # Quiz de recommandation
 │   ├── booking-section.tsx # Section réservation
 │   ├── contact-section.tsx # Section contact
 │   ├── footer.tsx        # Pied de page
