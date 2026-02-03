@@ -1,16 +1,11 @@
 import React from "react"
 import type { Metadata, Viewport } from 'next'
 import { Space_Grotesk, JetBrains_Mono } from 'next/font/google'
+import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
 
-const spaceGrotesk = Space_Grotesk({ 
-  subsets: ["latin"],
-  variable: '--font-space-grotesk',
-});
-const jetbrainsMono = JetBrains_Mono({ 
-  subsets: ["latin"],
-  variable: '--font-jetbrains-mono',
-});
+const _spaceGrotesk = Space_Grotesk({ subsets: ["latin"] });
+const _jetbrainsMono = JetBrains_Mono({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: 'TimeTravel Agency | Voyagez à travers le temps',
@@ -31,8 +26,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="fr">
-      <body className={`${spaceGrotesk.variable} ${jetbrainsMono.variable} font-sans antialiased overflow-x-hidden`}>
+      <body className="font-sans antialiased overflow-x-hidden">
         {children}
+        <Analytics />
       </body>
     </html>
   )
