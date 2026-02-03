@@ -7,62 +7,32 @@ import Image from "next/image"
 const destinations = [
   {
     id: 1,
-    name: "Égypte Ancienne",
-    period: "2500 av. J.-C.",
-    description: "Assistez à la construction des grandes pyramides et découvrez les secrets des pharaons.",
-    image: "/destinations/egypt.jpg",
-    duration: "3 jours",
-    riskLevel: "Modéré",
+    name: "Paris 1889",
+    period: "1889 ap. J.-C.",
+    description: "Découvrez la Belle Époque, admirez la Tour Eiffel fraîchement construite et vivez l'Exposition Universelle.",
+    image: "/destinations/paris.png",
+    duration: "4 jours",
+    riskLevel: "Faible",
     era: "past"
   },
   {
     id: 2,
-    name: "Rome Impériale",
-    period: "50 ap. J.-C.",
-    description: "Vivez la grandeur de l'Empire romain à son apogée, des arènes aux banquets impériaux.",
-    image: "/destinations/rome.jpg",
-    duration: "5 jours",
-    riskLevel: "Faible",
+    name: "Crétacé",
+    period: "65 millions av. J.-C.",
+    description: "Explorez l'ère des dinosaures et découvrez la nature préhistorique dans toute sa splendeur.",
+    image: "/destinations/cretace.png",
+    duration: "3 jours",
+    riskLevel: "Élevé",
     era: "past"
   },
   {
     id: 3,
-    name: "Renaissance Florentine",
-    period: "1500 ap. J.-C.",
-    description: "Rencontrez les grands maîtres de la Renaissance et admirez leurs chefs-d'œuvre en création.",
-    image: "/destinations/florence.jpg",
-    duration: "4 jours",
+    name: "Florence 1504",
+    period: "1504 ap. J.-C.",
+    description: "Plongez au cœur de la Renaissance, admirez les œuvres de Michel-Ange et vivez l'âge d'or de l'art italien.",
+    image: "/destinations/florence.png",
+    duration: "5 jours",
     riskLevel: "Faible",
-    era: "past"
-  },
-  {
-    id: 4,
-    name: "Tokyo Néon 2150",
-    period: "2150 ap. J.-C.",
-    description: "Explorez la mégalopole futuriste où technologie et tradition se mêlent harmonieusement.",
-    image: "/destinations/tokyo-future.jpg",
-    duration: "2 jours",
-    riskLevel: "Faible",
-    era: "future"
-  },
-  {
-    id: 5,
-    name: "Mars Colony",
-    period: "2350 ap. J.-C.",
-    description: "Visitez les premières colonies martiennes et découvrez la vie interplanétaire.",
-    image: "/destinations/mars.jpg",
-    duration: "7 jours",
-    riskLevel: "Élevé",
-    era: "future"
-  },
-  {
-    id: 6,
-    name: "Cité Atlantide",
-    period: "10000 av. J.-C.",
-    description: "Découvrez la légendaire civilisation perdue avant sa disparition mythique.",
-    image: "/destinations/atlantis.jpg",
-    duration: "4 jours",
-    riskLevel: "Modéré",
     era: "past"
   }
 ]
@@ -102,7 +72,7 @@ export function DestinationsSection() {
               className="group relative rounded-xl overflow-hidden glass-effect border border-border hover:border-primary/50 transition-all duration-500"
             >
               {/* Image */}
-              <div className="relative h-48 overflow-hidden">
+              <div className="relative h-72 overflow-hidden">
                 <Image
                   src={destination.image || "/placeholder.svg"}
                   alt={destination.name}
