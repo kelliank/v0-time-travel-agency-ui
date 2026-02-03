@@ -8,7 +8,7 @@ const navLinks = [
   { label: "Destinations", href: "#destinations" },
   { label: "Époques", href: "#eras" },
   { label: "Comment ça marche", href: "#about" },
-  { label: "Contact", href: "#contact" },
+  { label: "Contact", href: "#contact-form" },
 ]
 
 export function Navbar() {
@@ -44,8 +44,8 @@ export function Navbar() {
 
           {/* CTA Button */}
           <div className="hidden md:block">
-            <Button className="bg-primary text-primary-foreground hover:bg-primary/90">
-              Réserver
+            <Button asChild className="bg-primary text-primary-foreground hover:bg-primary/90">
+              <a href="#reservation">Réserver</a>
             </Button>
           </div>
 
@@ -73,8 +73,8 @@ export function Navbar() {
                   {link.label}
                 </a>
               ))}
-              <Button className="bg-primary text-primary-foreground hover:bg-primary/90 w-full mt-2">
-                Réserver
+              <Button asChild className="bg-primary text-primary-foreground hover:bg-primary/90 w-full mt-2">
+                <a href="#reservation" onClick={() => setIsOpen(false)}>Réserver</a>
               </Button>
             </div>
           </div>

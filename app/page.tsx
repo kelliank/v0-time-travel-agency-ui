@@ -4,6 +4,7 @@ import { AboutSection } from "@/components/about-section"
 import { DestinationsSection } from "@/components/destinations-section"
 import { ErasSection } from "@/components/eras-section"
 import { BookingSection } from "@/components/booking-section"
+import { ContactSection } from "@/components/contact-section"
 import { Footer } from "@/components/footer"
 import { Chatbot } from "@/components/chatbot"
 
@@ -16,6 +17,7 @@ export default function Home() {
       <ErasSection />
       <DestinationsSection />
       <BookingSection />
+      <ContactSection />
       <Footer />
       <Chatbot />
     </main>
