@@ -3,6 +3,7 @@ import { HeroSection } from "@/components/hero-section"
 import { AboutSection } from "@/components/about-section"
 import { DestinationsSection } from "@/components/destinations-section"
 import { ErasSection } from "@/components/eras-section"
+import { QuizSection } from "@/components/quiz-section"
 import { BookingSection } from "@/components/booking-section"
 import { ContactSection } from "@/components/contact-section"
 import { Footer } from "@/components/footer"
@@ -16,6 +17,7 @@ export default function Home() {
       <AboutSection />
       <ErasSection />
       <DestinationsSection />
+      <QuizSection />
       <BookingSection />
       <ContactSection />
       <Footer />
